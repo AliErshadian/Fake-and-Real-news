@@ -110,12 +110,12 @@ def fake_and_real_articles():
 
 
 # Word cloud for fake news
-def Word_cloud_for_fake_news():
+def Word_cloud_for_fake_or_real_news(State):
     print("Word cloud for fake news")
     from wordcloud import WordCloud
 
-    fake_data = data[data["target"] == "FAKE"]
-    all_words = ' '.join([text for text in fake_data.text])
+    _data = data[data["target"] == State]
+    all_words = ' '.join([text for text in _data.text])
 
     wordcloud = WordCloud(width= 800, height= 500,
                               max_font_size = 110,
@@ -127,22 +127,7 @@ def Word_cloud_for_fake_news():
     plt.show()
 
 
-# Word cloud for real news
-def Word_cloud_for_real_news():
-    print("Word cloud for real news")
-    from wordcloud import WordCloud
 
-    real_data = data[data["target"] == "REAL"]
-    all_words = ' '.join([text for text in fake_data.text])
-
-    wordcloud = WordCloud(width= 800, height= 500,
-                              max_font_size = 110,
-                              collocations = False).generate(all_words)
-
-    plt.figure(figsize=(10,7))
-    plt.imshow(wordcloud, interpolation='bilinear')
-    plt.axis("off")
-    plt.show()
 
 
 
@@ -177,11 +162,10 @@ def counter(text, column_text, quantity):
 #counter(data[data["target"] == "REAL"], "text", 20)
 
 # Word cloud for real news
-#Word_cloud_for_real_news()
-
+Word_cloud_for_fake_or_real_news("REAL")
 
 # Word cloud for fake news
-#Word_cloud_for_fake_news()
+Word_cloud_for_fake_or_real_news("FAKE")
 
 # How many fake and real articles?
 #fake_and_real_articles()
@@ -298,4 +282,4 @@ def Random_Forest_Classifier():
 
 #Decision_Tree_Classifier()
 
-Random_Forest_Classifier()
+#Random_Forest_Classifier()
